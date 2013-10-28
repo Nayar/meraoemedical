@@ -50,8 +50,7 @@ class OeMedicalAppointment(osv.Model):
                                        help='Medical Center'),
         'urgency': fields.selection([
             ('a', 'Normal'),
-            ('b', 'Urgent'),
-            ('c', 'Medical Emergency'), ],
+            ('b', 'Emergency'), ],
             string='Urgency Level'),
         'speciality': fields.many2one('oemedical.specialty',
                                       string='Specialty', 
