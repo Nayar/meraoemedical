@@ -68,7 +68,7 @@ class OeMedicalPatient(osv.Model):
         'vaccinations': fields.one2many('oemedical.vaccination', 'patient_id',
                                         'Vaccinations',),
         'dob': fields.date(string='DoB'),
-        'age': fields.char(size=256, string='Age',),
+        #'age': fields.char(size=256, string='Age',),
         'marital_status': fields.selection([('s', 'Single'), ('m', 'Married'),
                                             ('w', 'Widowed'),
                                             ('d', 'Divorced'),
