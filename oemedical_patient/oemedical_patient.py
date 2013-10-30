@@ -68,9 +68,8 @@ class OeMedicalPatient(osv.Model):
         'vaccinations': fields.one2many('oemedical.vaccination', 'patient_id',
                                         'Vaccinations',),
         'dob': fields.date(string='DoB'),
-        #'age': fields.char(size=256, string='Age',),
-        'age': fields.function(compute_ouska_age, type='integer',\
-                                           multi=False)
+        'age': fields.char(size=256, string='Age Age',),
+    
         'marital_status': fields.selection([('s', 'Single'), ('m', 'Married'),
                                             ('w', 'Widowed'),
                                             ('d', 'Divorced'),
@@ -93,8 +92,6 @@ class OeMedicalPatient(osv.Model):
          'ref': lambda obj, cr, uid, context: 
                 obj.pool.get('ir.sequence').get(cr, uid, 'oemedical.patient'),
                  }
-    def compute_ouska_age():
-        return 66
 
 OeMedicalPatient()
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
