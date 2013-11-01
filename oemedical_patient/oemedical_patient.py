@@ -30,8 +30,8 @@ class OeMedicalPatient(osv.Model):
 		result = {}
 		for r in self.browse(cr, uid, ids, context=context):	
 			age=0
-			if r.dob
-			age= (datetime.now()-datetime.strptime(r.dob,"%Y-%m-%d")).days
+			if r.dob:
+			age= (datetime.now()-datetime.strptime(r.dob,"%Y-%M-%d")).days/366
 			result[r.id] = age 
 		return result
  
