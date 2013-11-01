@@ -29,7 +29,10 @@ class OeMedicalPatient(osv.Model):
 		records = self.browse(cr, uid, ids, context=context)
 		result = {}
 		for r in self.browse(cr, uid, ids, context=context):	
-			result[r.id] = 24 
+			age=0
+			if r.dob
+			age= (datetime.now()-datetime.strptime(r.dob,"%Y-%m-%d")).days
+			result[r.id] = age 
 		return result
  
 	_name='oemedical.patient'
@@ -77,7 +80,7 @@ class OeMedicalPatient(osv.Model):
 													'Vaccinations',),
 		'dob': fields.date(string='DoB'),
 		#'age': fields.char(size=256, string='Age Age',),
-		'age': fields.function(_compute_age, string= "laz",arg=None, fnct_inv=None, fnct_inv_arg=None, type="float",fnct_search=None, obj=None, method=False, store=False, multi=False,),
+		'age': fields.function(_compute_age, string= "laz",arg=None, fnct_inv=None, fnct_inv_arg=None, type="float",fnct_search=None, obj=None, method=True, store=False, multi=False,),
 	
 		'marital_status': fields.selection([('s', 'Single'), ('m', 'Married'),
 														('w', 'Widowed'),
