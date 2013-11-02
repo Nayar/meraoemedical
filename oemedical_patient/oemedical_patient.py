@@ -25,14 +25,16 @@ from osv import fields
 
 
 class OeMedicalPatient(osv.Model):
-	def _compute_age(self, cr, uid, ids,field_name,field_value,arg, context=None):
-		records = self.browse(cr, uid, ids, context=context)
+	def _compute_age(self, cr, uid, ids,field_name,field_value,arg, context={}):
 		result = {}
+		now = datetime.now()
 		for r in self.browse(cr, uid, ids, context=context):	
-			age=0
 			if r.dob:
-			age= (datetime.now()-datetime.strptime(r.dob,"%Y-%M-%d")).days/366
-			result[r.id] = age 
+				dob = datetime.strptime(r.dob,'%Y-%M-%d')
+				delta=relativedelta(now, dob)
+				result[r.id]= str(delta.years) + str(delta.months) +"M "+ str(delta.days)+"d"
+			else:
+				result[r.id] =""
 		return result
  
 	_name='oemedical.patient'
