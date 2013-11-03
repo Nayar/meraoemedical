@@ -21,7 +21,8 @@
 #/#############################################################################
 from osv import osv
 from osv import fields
-
+from datetime import datetime 
+from dateutil.relativedelta import relativedelta
 
 
 class OeMedicalPatient(osv.Model):
@@ -32,7 +33,7 @@ class OeMedicalPatient(osv.Model):
 			if r.dob:
 				dob = datetime.strptime(r.dob,'%Y-%M-%d')
 				delta=relativedelta(now, dob)
-				result[r.id]= str(delta.years) + str(delta.months) +"M "+ str(delta.days)+"d"
+				result[r.id]= str(delta.years)+"Y" + str(delta.months) +"M "+ str(delta.days)+"d"
 			else:
 				result[r.id] =""
 		return result
@@ -82,7 +83,7 @@ class OeMedicalPatient(osv.Model):
 													'Vaccinations',),
 		'dob': fields.date(string='DoB'),
 		#'age': fields.char(size=256, string='Age Age',),
-		'age': fields.function(_compute_age, string= "laz",arg=None, fnct_inv=None, fnct_inv_arg=None, type="float",fnct_search=None, obj=None, method=True, store=False, multi=False,),
+		'age': fields.function(_compute_age, string= "laz",arg=None, fnct_inv=None, fnct_inv_arg=None, type="char",fnct_search=None, obj=None, method=True, store=False, multi=False,),
 	
 		'marital_status': fields.selection([('s', 'Single'), ('m', 'Married'),
 														('w', 'Widowed'),
