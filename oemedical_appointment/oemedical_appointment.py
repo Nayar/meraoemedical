@@ -25,8 +25,8 @@ from osv import fields
   
 
 class OeMedicalAppointment(osv.Model):
-    def _autoAppzz(self,cr,uid,ids,appointment_type):
-      info=self.browse(cr,uid,ids,appointment_type)
+    def autoApp(self,cr,uid,ids,appointment_type):
+      info=self.browse(cr,uid,appointment_type)
       for lol in self.mystates:
 	if info[0].appointment_type == lol[0]:
 	  return ('newcase', 'New Case')
