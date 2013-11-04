@@ -41,9 +41,8 @@ class OeMedicalAppointment(osv.Model):
                                   help='Physician\'s Name'),
         'comments': fields.text(string='Comments'),
         'appointment_type': fields.selection([
-            ('ambulatory', 'Ambulatory'),
-            ('outpatient', 'Outpatient'),
-            ('inpatient', 'Inpatient'),
+            ('newcase', 'New Case'),
+            ('ontreatment', 'On Treatment'),
         ], string='Type'),
         'institution': fields.many2one('res.partner',
                                        string='Health Center',
