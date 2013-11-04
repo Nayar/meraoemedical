@@ -38,11 +38,11 @@
                         <group>
 
 					        <field name="patient_id" />
+					        <field name="urgency" />
 					        <field name="doctor" />
 					        <field name="appointment_date" />
 					        <field name="duration" />
 					        <field name="appointment_type" />
-					        <field name="urgency" />
 					        <field name="consultations" />
 					        <field name="institution" />
 					        <field name="speciality" />
