@@ -22,8 +22,20 @@
 from osv import osv
 from osv import fields
 
+  
 
 class OeMedicalAppointment(osv.Model):
+    def _autoAppzz(self,cr,uid,ids,appointment_type):
+      info=self.browse(cr,uid,ids,appointment_type)
+      for lol in self.mystates:
+	if info[0].appointment_type == lol[0]:
+	  return ('newcase', 'New Case')
+	
+    mystates = [('newcase', 'New Casezzz'),
+		('ontreatment', 'On Treatment')]
+    
+  
+  
     _name = 'oemedical.appointment'
 
     _columns = {
@@ -40,10 +52,7 @@ class OeMedicalAppointment(osv.Model):
                                   string='Physician',select=True, 
                                   help='Physician\'s Name'),
         'comments': fields.text(string='Comments'),
-        'appointment_type': fields.selection([
-            ('newcase', 'New Case'),
-            ('ontreatment', 'On Treatment'),
-        ], string='Type'),
+        'appointment_type': fields.selection(mystates, string='Type'),
         'institution': fields.many2one('res.partner',
                                        string='Health Center',
                                        help='Medical Center'),
@@ -59,7 +68,7 @@ class OeMedicalAppointment(osv.Model):
     _defaults = {
          'name': lambda obj, cr, uid, context: 
             obj.pool.get('ir.sequence').get(cr, uid, 'oemedical.appointment'),
-                 }
+		}
 
 OeMedicalAppointment()
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
