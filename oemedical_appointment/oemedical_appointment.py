@@ -35,7 +35,7 @@ class OeMedicalAppointment(osv.Model):
 						}
 				return {'value':{'doctor': "LOL",}, 'warning':warning}
 		
-		return {'value':{'doctot':'12345'}}
+		return {'value':{'doctor':'12345'}}
 		
     
   
