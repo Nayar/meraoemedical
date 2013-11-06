@@ -27,13 +27,11 @@ from osv import fields
 class OeMedicalAppointment(osv.Model):
     def autoApp(self,cr,uid,ids,appointment_type,context=None):
 		if appointment_type:
+			
 			x=appointment_type
-			if x == "New Case":
-				warning = {
-						'title':_("Warning"),
-						'message':_('warning message'),
-						}
-				return {'value':{'doctor': "LOL",}, 'warning':warning}
+			if x == "newcase":
+				
+				return {'value':{'doctor': "LOL"}}
 		
 		return {'value':{'doctor':'12345'}}
 		
