@@ -25,14 +25,18 @@ from osv import fields
   
 
 class OeMedicalAppointment(osv.Model):
-    def autoApp(self,cr,uid,ids,appointment_type):
-      info=self.browse(cr,uid,appointment_type)
-      for lol in self.mystates:
-	if info[0].appointment_type == lol[0]:
-	  return ('newcase', 'New Case')
-	
-    mystates = [('newcase', 'New Casezzz'),
-		('ontreatment', 'On Treatment')]
+    def autoApp(self,cr,uid,ids,appointment_type,context=None):
+		if appointment_type:
+			x=appointment_type
+			if x == "New Case":
+				warning = {
+						'title':_("Warning"),
+						'message':_('warning message'),
+						}
+				return {'value':{'doctor': "LOL",}, 'warning':warning}
+		
+		return {'value':{'doctot':'12345'}}
+		
     
   
   
@@ -48,11 +52,11 @@ class OeMedicalAppointment(osv.Model):
         'name': fields.char(size=256, string='Appointment ID', readonly=True),
         'appointment_date': fields.datetime(string='Date and Time'),
         'duration': fields.float('Duration'),
-        'doctor': fields.many2one('oemedical.physician',
-                                  string='Physician',select=True, 
-                                  help='Physician\'s Name'),
+        'doctor': fields.char(string="Physician", size=50),
         'comments': fields.text(string='Comments'),
-        'appointment_type': fields.selection(mystates, string='Type'),
+        'appointment_type': fields.selection([('newcase', 'New Case'),
+											 ('ontreatment', 'On Treatment')], 
+											 string='Type'),
         'institution': fields.many2one('res.partner',
                                        string='Health Center',
                                        help='Medical Center'),
@@ -72,3 +76,7 @@ class OeMedicalAppointment(osv.Model):
 
 OeMedicalAppointment()
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+
+"""'doctor': fields.many2one('oemedical.physician',
+                                  string='Physician',select=True, 
+                                  help='Physician\'s Name'),"""
