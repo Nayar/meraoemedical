@@ -13,7 +13,7 @@
 					<field name="prnt" />
 					<field name="review" />
 					<field name="short_comment" />
-					<field name="template" />
+					<field name="medicament" />
 					<field name="quantity" />
 				</tree>
 			</field>
@@ -31,7 +31,7 @@
 					<field name="prnt" />
 					<field name="review" />
 					<field name="short_comment" />
-					<field name="template" />
+					<field name="medicament" />
 					<field name="quantity" />
 				</form>
 			</field>
@@ -49,7 +49,7 @@
 					<field name="prnt" />
 					<field name="review" />
 					<field name="short_comment" />
-					<field name="template" />
+					<field name="medicament" />
 					<field name="quantity" />
 					<newline />
 					<group expand="0" string="Group By...">
@@ -63,7 +63,7 @@
 						<filter string="Comment" domain="[]"
 							context="{'group_by':'short_comment'}" />
 						<filter string="Medication Template" domain="[]"
-							context="{'group_by':'template'}" />
+							context="{'group_by':'medicament'}" />
 						<filter string="Quantity" domain="[]" context="{'group_by':'quantity'}" />
 					</group>
 				</search>
