@@ -76,9 +76,9 @@
 				<search string="Oemedical Appointment">
 					<field name="name" />
 					<field name="patient_id" />
+					<field name="appointment_type" on_change="autoApp(appointment_type)"/>
 					<field name="doctor" />
 					<field name="appointment_date" />
-					<field name="appointment_type" />
 					<field name="urgency" />
 					<field name="consultations" />
 					<field name="institution" />
