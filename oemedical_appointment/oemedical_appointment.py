@@ -31,7 +31,7 @@ class OeMedicalAppointment(osv.Model):
 			x=appointment_type
 			if x == "newcase":
 				
-				return {'value':{'doctor': {"LOL","rofl"}}}
+				return {'value':{'doctor': "LOL"}}
 		
 		return {'value':{'doctor':''}}
 		
