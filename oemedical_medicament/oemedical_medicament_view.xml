@@ -8,6 +8,7 @@
 			<field name="arch" type="xml">
 				<tree string="Oemedical Medicament">
 					<field name="name" />
+					<field name="product" />
 					<field name="category" />
 					<field name="indications" />
 					<field name="therapeutic_action" />
@@ -35,6 +36,7 @@
                     <notebook>
                         <page string="Main">
 					        <field name="name" />
+					<field name="product" />
 					        <field name="category" />
 					        <field name="active_component" />
                             <separator string="Indications" colspan="4"/>
@@ -83,6 +85,7 @@
 			<field name="arch" type="xml">
 				<search string="Oemedical Medicament">
 					<field name="name" />
+					<field name="product" />
 					<field name="category" />
 					<field name="indications" />
 					<field name="therapeutic_action" />
