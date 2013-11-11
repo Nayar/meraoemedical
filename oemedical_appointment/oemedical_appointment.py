@@ -22,16 +22,47 @@
 from osv import osv
 from osv import fields
 
-  
+import psycopg2
+import random
+
+def presentDocs():
+    con = None;
+    distinctUsers = []
+    try:
+        con = psycopg2.connect(database = 'hospital', user = 'postgres', host = '192.168.56.101', password = 'lol')
+        cur = con.cursor()
+        cur.execute("select distinct employee_id from hr_attendance")
+        rows = cur.fetchall()
+        for row in rows:
+            cur.execute("select employee_id, action from hr_attendance where employee_id = "+str(row[0])+" order by create_date DESC limit 1")
+            rows2 = cur.fetchone()
+            if rows2[1] == 'sign_in':
+                cur.execute("select name_related from hr_employee where id='"+str(rows2[0])+"'")
+                rows3 = cur.fetchall()
+                #cur.execute("")
+                #rows4 = cur.fetchall()
+                for row3 in rows3:
+                    distinctUsers.append(row3[0])
+    except psycopg2.DatabaseError, e:
+        print e
+    finally:
+        if con:
+            con.close()
+    if len(distinctUsers) == 0:
+        return False
+    else:
+        ans = random.randint(0,len(distinctUsers)-1)
+        return distinctUsers[ans]
 
 class OeMedicalAppointment(osv.Model):
+	
     def autoApp(self,cr,uid,ids,appointment_type,context=None):
 		if appointment_type:
 			
 			x=appointment_type
 			if x == "newcase":
 				
-				return {'value':{'doctor': "LOL"}}
+				return {'value':{'doctor': presentDocs()}}
 		
 		return {'value':{'doctor':''}}
 		
