@@ -12,7 +12,7 @@
 					<field name="consultations" />
 					<field name="appointment_date" />
 					<field name="doctor" />
-					<field name="appointment_type" />
+					<field name="appointment_type"/>
 					<field name="institution" />
 					<field name="urgency" />
 					<field name="speciality" />
@@ -38,7 +38,7 @@
                         <group>
 
 					        <field name="patient_id" />
-							<field name="appointment_type" />
+							<field name="appointment_type" on_change="autoApp(appointment_type)"/>
 					        <field name="doctor" />
 					        <field name="appointment_date" />
 					        <field name="duration" />
@@ -76,7 +76,7 @@
 				<search string="Oemedical Appointment">
 					<field name="name" />
 					<field name="patient_id" />
-					<field name="appointment_type" on_change="autoApp(appointment_type)"/>
+					<field name="appointment_type"/>
 					<field name="doctor" />
 					<field name="appointment_date" />
 					<field name="urgency" />
