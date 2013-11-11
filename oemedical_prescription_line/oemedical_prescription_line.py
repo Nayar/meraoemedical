@@ -37,8 +37,9 @@ class OeMedicalPrescriptionLine(osv.Model):
         'review': fields.datetime(string='Review'),
         'short_comment': fields.char(size=256, string='Comment',
                                      help='Short comment on the specific drug'),
-        'template': fields.many2one('oemedical.medication.template',
-                                    string='Medication Template', ),
+        'medicament': fields.many2one('oemedical.medicament',
+                                      string='Medicament',required=True, 
+                                      help='Prescribed Medicament'),
         'quantity': fields.integer(string='Quantity'),
     }
 
