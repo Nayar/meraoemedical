@@ -30,7 +30,7 @@ class OeMedicalPhysician(osv.Model):
         'name': fields.char(size=256, string='Name', required=True),
         'info': fields.text(string='Extra info'),
         'code': fields.char(size=256, string='ID'),
-        'health_professional': fields.many2one('res.partner',
+        'health_professional': fields.many2one('res.users',
                                                string='Health Professional',
                     help='Health Professional\'s Name, from the partner list' ),
         'specialty': fields.many2one('oemedical.specialty',
