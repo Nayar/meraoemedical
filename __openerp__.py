@@ -36,6 +36,7 @@
 
     'name': 'OeMedical : Free Health and Hospital Information System',
     'version': '1.0',
+    'sequence' : 1,
     'author': "OeMEdical Team",
     'category': 'Generic Modules/Others',
     'depends': ['base', 'sale', 'purchase', 'account', 'product'],
