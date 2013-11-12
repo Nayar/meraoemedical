@@ -29,20 +29,22 @@ def presentDocs():
     con = None;
     distinctUsers = []
     try:
-        con = psycopg2.connect(database = 'hospital', user = 'postgres', host = '192.168.56.101', password = 'lol')
+        con = psycopg2.connect(database = 'nayahospital', user = 'postgres', host = '192.168.56.101', password = 'lol')
         cur = con.cursor()
-        cur.execute("select distinct employee_id from hr_attendance")
+        cur.execute("select id from oemedical_physician order by random()")
+        #cur.execute("select distinct employee_id from hr_attendance")
         rows = cur.fetchall()
         for row in rows:
-            cur.execute("select employee_id, action from hr_attendance where employee_id = "+str(row[0])+" order by create_date DESC limit 1")
-            rows2 = cur.fetchone()
-            if rows2[1] == 'sign_in':
-                cur.execute("select name_related from hr_employee where id='"+str(rows2[0])+"'")
-                rows3 = cur.fetchall()
+        #    cur.execute("select employee_id, action from hr_attendance where employee_id = "+str(row[0])+" order by create_date DESC limit 1")
+        #    rows2 = cur.fetchone()
+        #    if rows2[1] == 'sign_in':
+        #        cur.execute("select name_related from hr_employee where id='"+str(rows2[0])+"'")
+        #        rows3 = cur.fetchall()
                 #cur.execute("")
                 #rows4 = cur.fetchall()
-                for row3 in rows3:
-                    distinctUsers.append(row3[0])
+        #        for row3 in rows3:
+                    #distinctUsers.append(rows[0])
+			return rows[0]
     except psycopg2.DatabaseError, e:
         print e
     finally:
@@ -81,7 +83,9 @@ class OeMedicalAppointment(osv.Model):
         'name': fields.char(size=256, string='Appointment ID', readonly=True),
         'appointment_date': fields.datetime(string='Date and Time'),
         'duration': fields.float('Duration'),
-        'doctor': fields.char(string="Physician", size=50),
+        'doctor': fields.many2one('oemedical.physician',
+                                  string='Physician',select=True, 
+                                  help='Physician\'s Name'),
         'comments': fields.text(string='Comments'),
         'appointment_type': fields.selection([('newcase', 'New Case'),
 											 ('ontreatment', 'On Treatment')], 
