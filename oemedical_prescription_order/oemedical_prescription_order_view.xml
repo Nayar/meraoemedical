@@ -38,8 +38,6 @@
                         <group>
 					        <field name="prescription_date" />
 					        <field name="patient_id" />
-					        <field name="pregnancy_warning" />
-					        <field name="pharmacy" />
 					        <field name="prescription_warning_ack" />
 					        <field name="user_id" />
 					        <newline/>
