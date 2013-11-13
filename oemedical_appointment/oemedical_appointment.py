@@ -31,19 +31,24 @@ def presentDocs():
     try:
         con = psycopg2.connect(database = 'nayahospital', user = 'postgres', host = '192.168.56.101', password = 'lol')
         cur = con.cursor()
-        cur.execute("select id from oemedical_physician order by random()")
-        #cur.execute("select distinct employee_id from hr_attendance")
+        cur.execute("""
+					select oemedical_physician.id 
+					from oemedical_physician
+					INNER JOIN hr_employee
+					ON hr_employee.name_related = oemedical_physician.name
+					INNER JOIN hr_attendance
+					on hr_attendance.employee_id = hr_employee.id
+					WHERE hr_attendance.action = 'sign_in'
+					EXCEPT ALL
+					select oemedical_physician.id
+					from oemedical_physician
+					INNER JOIN hr_employee
+					ON hr_employee.name_related = oemedical_physician.name
+					INNER JOIN hr_attendance
+					on hr_attendance.employee_id = hr_employee.id
+					WHERE hr_attendance.action = 'sign_out'""")
         rows = cur.fetchall()
         for row in rows:
-        #    cur.execute("select employee_id, action from hr_attendance where employee_id = "+str(row[0])+" order by create_date DESC limit 1")
-        #    rows2 = cur.fetchone()
-        #    if rows2[1] == 'sign_in':
-        #        cur.execute("select name_related from hr_employee where id='"+str(rows2[0])+"'")
-        #        rows3 = cur.fetchall()
-                #cur.execute("")
-                #rows4 = cur.fetchall()
-        #        for row3 in rows3:
-                    #distinctUsers.append(rows[0])
 			return rows[0]
     except psycopg2.DatabaseError, e:
         print e
