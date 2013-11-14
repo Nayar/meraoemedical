@@ -29,24 +29,27 @@ def presentDocs():
     con = None;
     distinctUsers = []
     try:
-        con = psycopg2.connect(database = 'nayahospital', user = 'postgres', host = '192.168.56.101', password = 'lol')
+        con = psycopg2.connect(database = 'nayahospital', user = 'postgres', host = 'localhost', password = 'lol')
         cur = con.cursor()
-        cur.execute("""
-					select oemedical_physician.id 
-					from oemedical_physician
-					INNER JOIN hr_employee
-					ON hr_employee.name_related = oemedical_physician.name
-					INNER JOIN hr_attendance
-					on hr_attendance.employee_id = hr_employee.id
-					WHERE hr_attendance.action = 'sign_in'
-					EXCEPT ALL
-					select oemedical_physician.id
-					from oemedical_physician
-					INNER JOIN hr_employee
-					ON hr_employee.name_related = oemedical_physician.name
-					INNER JOIN hr_attendance
-					on hr_attendance.employee_id = hr_employee.id
-					WHERE hr_attendance.action = 'sign_out'""")
+        query = """select oemedical_physician.id from oemedical_physician where oemedical_physician.id IN (
+	select oemedical_physician.id 
+	from oemedical_physician
+	INNER JOIN hr_employee
+	ON hr_employee.name_related = oemedical_physician.name
+	INNER JOIN hr_attendance
+	on hr_attendance.employee_id = hr_employee.id
+	WHERE hr_attendance.action = 'sign_in'
+	EXCEPT ALL
+	select oemedical_physician.id
+	from oemedical_physician
+	INNER JOIN hr_employee
+	ON hr_employee.name_related = oemedical_physician.name
+	INNER JOIN hr_attendance
+	on hr_attendance.employee_id = hr_employee.id
+	WHERE hr_attendance.action = 'sign_out'
+)
+ORDER BY random()"""
+        cur.execute(query)
         rows = cur.fetchall()
         for row in rows:
 			return rows[0]
